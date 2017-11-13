@@ -1,1 +1,6 @@
 Assets\SteamVR filter=lfs diff=lfs merge=lfs -text
+Assets/Japanese-Style filter=lfs diff=lfs merge=lfs -text
+Series/ filter=lfs diff=lfs merge=lfs -text
+Assets/Japanese-Style[[:space:]]Series/ filter=lfs diff=lfs merge=lfs -text
+Assets/Water[[:space:]]Flow[[:space:]]FREE/ filter=lfs diff=lfs merge=lfs -text
+Assets/Wood[[:space:]]texture[[:space:]]floor_01/ filter=lfs diff=lfs merge=lfs -text
