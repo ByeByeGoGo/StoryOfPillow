@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WateringCanControl : MonoBehaviour {
+public class DumpingControl : MonoBehaviour {
 
-	public float wateringAngle;
+	public float dumpingAngle;
 
-	public enum State { Idle, Watering };
+	public enum State { Idle, Dumping };
 	public State state;
 
 	private Vector3 vecOrigUp;
@@ -28,18 +28,18 @@ public class WateringCanControl : MonoBehaviour {
 		float angleY = Vector3.Angle(vecOrigUp, transform.up);
 		float angleX = Vector3.Angle(vecOrigRight, transform.right);
 
-		if (angleX > wateringAngle && angleY > wateringAngle) {
-			Watering();
+		if (angleX > dumpingAngle && angleY > dumpingAngle) {
+			Dumping();
 		} else {
 			Idle();
 		}
 
 	}
 
-	void Watering() {
-		if (state == State.Watering) return;
+	void Dumping() {
+		if (state == State.Dumping) return;
 		
-		state = State.Watering;
+		state = State.Dumping;
 		particleSystem.Play();
 	}
 
