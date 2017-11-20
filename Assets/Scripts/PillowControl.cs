@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PillowControl : MonoBehaviour {
 
-    public int threshold;
+    public int dumpThreshold;
+    public float hugTimeThreshold;
+    public float hugMargin;
 
     public GameObject Seed;
     public GameObject BabyForm;
@@ -28,15 +30,22 @@ public class PillowControl : MonoBehaviour {
     private Renderer rend;
 
     private GameManager gameManager;
+    private Transform hand;
 
     private int wateringCnt;
     private int fertilizeringCnt;
 
+    private float hugTime;
+
     void Awake() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+        hand = GameObject.FindWithTag("Hand").transform;
+
         wateringCnt = 0;
         fertilizeringCnt = 0;
+
+        hugTime = 0;
     }
 
     // Use this for initialization
@@ -53,6 +62,22 @@ public class PillowControl : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void FixedUpdate() {
+        float disWithHand = Vector3.Distance(transform.position, hand.position);
+
+        if (disWithHand >= hugMargin) {
+            hugTime = 0;
+        } else {
+            hugTime += Time.deltaTime;
+        }
+
+        if (hugTime >= hugTimeThreshold) {
+            Debug.Log("Hug");
+            hugTime = 0;
+            gameManager.HugEvent();
+        }
+    }
 
     public void BecomeBaby()
     {
@@ -140,16 +165,16 @@ public class PillowControl : MonoBehaviour {
             fertilizeringCnt += 1;
         }
 
-        if (wateringCnt >= threshold) {
-            wateringCnt = wateringCnt % threshold;
+        if (wateringCnt >= dumpThreshold) {
+            Debug.Log("watering");
+            wateringCnt = wateringCnt % dumpThreshold;
             gameManager.WateringEvent();
-            Debug.Log("watering Hit!");
         }
 
-        if (fertilizeringCnt > threshold) {
-            fertilizeringCnt = fertilizeringCnt % threshold;
-            gameManager.FertilizingEvent();
+        if (fertilizeringCnt > dumpThreshold) {
             Debug.Log("fertilizering Hit!");
+            fertilizeringCnt = fertilizeringCnt % dumpThreshold;
+            gameManager.FertilizingEvent();
         }
     }
 }
