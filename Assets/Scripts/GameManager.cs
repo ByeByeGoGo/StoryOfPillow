@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     //Handling Watering
-    void WateringEvent()
+    public void WateringEvent()
     {
         Wandering(false);
         WateringNum++;
@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour {
     }
 
     //Handling Fertilizing
-    void FertilizingEvent()
+    public void FertilizingEvent()
     {
         Wandering(false);
         FertilizingNum++;
@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour {
     }
 
     //Handling hugging
-    void HugEvent()
+    public void HugEvent()
     {
         Wandering(false);
         ChangeLoveValue(true, 20);

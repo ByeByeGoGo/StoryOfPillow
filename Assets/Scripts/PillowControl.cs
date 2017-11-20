@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PillowControl : MonoBehaviour {
 
+    public int threshold;
+
     public GameObject Seed;
     public GameObject BabyForm;
 
@@ -24,6 +26,18 @@ public class PillowControl : MonoBehaviour {
     public Material Fail;
 
     private Renderer rend;
+
+    private GameManager gameManager;
+
+    private int wateringCnt;
+    private int fertilizeringCnt;
+
+    void Awake() {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        wateringCnt = 0;
+        fertilizeringCnt = 0;
+    }
 
     // Use this for initialization
     void Start () {
@@ -116,6 +130,26 @@ public class PillowControl : MonoBehaviour {
                     rend.material = Fail;
                     break;
             }
+        }
+    }
+
+    void OnParticleCollision(GameObject obj) {
+        if (obj.tag == "Water") {
+            wateringCnt += 1;
+        } else if (obj.tag == "Fertilizer") {
+            fertilizeringCnt += 1;
+        }
+
+        if (wateringCnt >= threshold) {
+            wateringCnt = wateringCnt % threshold;
+            gameManager.WateringEvent();
+            Debug.Log("watering Hit!");
+        }
+
+        if (fertilizeringCnt > threshold) {
+            fertilizeringCnt = fertilizeringCnt % threshold;
+            gameManager.FertilizingEvent();
+            Debug.Log("fertilizering Hit!");
         }
     }
 }
