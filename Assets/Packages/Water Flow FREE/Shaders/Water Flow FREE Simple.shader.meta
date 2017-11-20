@@ -1,6 +1,3 @@
-fileFormatVersion: 2
-guid: 65ae9ae666ea007419d4f36e01d4a819
-ShaderImporter:
-  defaultTextures:
-  - _MainTex: {fileID: 2800000, guid: b11b419d3ecdf814581bd60ec26cda0b, type: 3}
-  userData: 
+version https://git-lfs.github.com/spec/v1
+oid sha256:56043fb4d36a87bab26e039c988264aab89b91bf384eff50e7815b991bdb949b
+size 189
